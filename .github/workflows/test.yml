@@ -1,0 +1,25 @@
+# Build, vet and unit-test every push and pull request, and check docs/ is up to date.
+# Acceptance tests need a live NSResolver account and run locally (see README).
+name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - run: go build -v ./...
+      - run: go vet ./...
+      - run: go test -v ./...
+      - name: Docs are up to date
+        run: |
+          go generate ./...
+          git diff --exit-code -- docs/ || (echo "Run 'go generate ./...' and commit docs/" && exit 1)

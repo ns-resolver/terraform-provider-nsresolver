@@ -1,0 +1,11 @@
+# Built provider binaries and GoReleaser output
+terraform-provider-nsresolver
+terraform-provider-nsresolver_*
+dist/
+
+# Local Terraform state from trying examples
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log

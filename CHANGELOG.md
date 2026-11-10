@@ -1,4 +1,4 @@
-## 1.0.0 (unreleased)
+## 1.0.0 (November 10, 2026)
 
 First release.
 
